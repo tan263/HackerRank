@@ -1,0 +1,16 @@
+def minimumSwaps(arr):
+    n = len(arr)
+    n_swap = 0
+    pos = [None]*n
+    for i in range(n):
+        pos[arr[i]-1] = i
+    #print(pos)
+    for i in range(n):
+        if arr[i] != i+1:
+            n_swap +=1
+            j = pos[i] 
+            arr[j] = arr[i]
+            pos[arr[i]-1] = j
+            #print(i)
+            #print(arr)
+    return n_swap
