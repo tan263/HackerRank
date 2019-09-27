@@ -1,0 +1,39 @@
+def sherlockAndAnagrams(s):    
+    def Dict(d,s,m):
+        l_s = len(s)
+        L = []
+        for e in d:
+            for j in range(len(d[e])):
+                k = d[e][j]
+                if k < l_s-1:
+                    L.append(k+1)
+
+        dictionary = {}
+
+        for k in L:
+            e = "".join(sorted(s[k-m+1:k+1]))
+            if e in dictionary:
+                dictionary[e].append(k)
+            else:
+                dictionary[e] = [k]
+        return dictionary
+    
+    number = 0
+    dictionary = {}
+    for i in range(len(s)):
+        if s[i] in dictionary:
+            dictionary[s[i]].append(i)
+        else:
+            dictionary[s[i]] = [i]
+    for e in dictionary:
+        l_e = len(dictionary[e])
+        number += l_e*(l_e-1)/2
+    m = 1
+    while dictionary != {}:
+        m += 1
+        dictionary = Dict(dictionary,s,m)
+        for e in dictionary:
+            l_e = len(dictionary[e])
+            number += l_e*(l_e-1)/2
+
+    return int(number)
